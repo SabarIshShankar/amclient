@@ -34,10 +34,16 @@ const Home: React.FC = () => {
     
     <Grid item md={6} sm={12} xs={12}>
       <div style={{margin: 40}}>
-        
+        <h4>Join a meeting</h4>
+      </div>
+      <div style={{margin: 40}}>
+        <input ref={inputRef} style={{margin: 10, height: 30, paddingLeft: 10, paddingRight: 10}} placeholder="Enter URL or id"/>
+        <Button variant="contained" style={{backgroundColor: 'green', color: 'white', margin: 10}} onClick={joinRoom}>JOIN</Button>
       </div>
     </Grid>
     </Grid>
     </>
   )
 }
+
+export default Home
