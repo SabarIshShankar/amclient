@@ -33,4 +33,4 @@ const Header: React.FC<Props> = ({open, setOpen, showDrawerChildren}) => {
     )
 }
 
-export default React.meme(Header)
+export default React.memo(Header)
