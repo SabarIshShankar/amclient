@@ -48,4 +48,35 @@ const Signup: React.FC = () => {
     const registerValidation = useCallback(() => {
         return(regexMatch("name", nameRef.current) && regexMatch("email", emailRef.current) && regexMatch("password", passwordRef.current))
     }, [])
+
+    const regexMatch = useCallback((field: Field, val: string) => {
+        if(field === 'name'){
+            const regex = /^[A-Za-z]{1, 25}$/
+            return val.trim().match(regex)
+        }
+        else if(field === "email"){
+            const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+            return val.trim().match(regex)
+        }
+        else{
+            const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
+            return val.trim().match(regex)
+        }
+    }, [])
+
+    const validation = useCallback((field: Fiedl, val: string) => {
+        const input = document.getElementById(field + "-input")
+        if(field === "name"){
+            if(regexMatch(field, val)){
+                document.getElementById("name-validation-message")?.classList.add('invisible')
+                input?.classList.remove('invalid')
+                input?.classList.remove('input-with-label')
+            }
+            else {
+                document.getElementById("name-validation-message")?.classList.remove('invisible')
+                input?.classList.add('invalid')
+                input?.classList.add('inputs-with-label')
+            }
+        }
+    }, [])
 }
