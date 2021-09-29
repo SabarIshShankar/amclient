@@ -20,3 +20,5 @@ const Members: React.FC<Props> = ({peers}) => {
         </>
     )
 }
+
+export default Members

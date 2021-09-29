@@ -49,4 +49,4 @@ const DrawerComponent: React.FC<Props> = ({
     )
 }
 
-export default React.meme(DrawerComponent)
+export default React.memo(DrawerComponent)
