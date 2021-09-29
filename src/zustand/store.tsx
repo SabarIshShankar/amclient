@@ -71,7 +71,7 @@ const login = async(set: SetState<State>, email: string, password: string) => {
             email: email,
             password: password
         }), {
-            header: {
+            headers: {
                 'Content-Type': 'application/json'
             }
         })
