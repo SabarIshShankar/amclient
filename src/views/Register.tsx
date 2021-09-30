@@ -1,19 +1,19 @@
 import React, {useRef, useCallback, MouseEvent} from 'react';
 import {Button} from '@material-ui/core';
-import {Link, usehistory} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import axios from 'axios';
 import useStore from '../zustand/store';
 import useWillMount from '../custom-hooks/useWillMount';
 import './styles/Register.css';
 
-type Fiedl = "name" | "email" | "password"
+type Field = "name" | "email" | "password"
 
 const Signup: React.FC = () => {
     const nameRef = useRef<string>("")
     const emailRef = useRef<string>("")
     const passwordRef = useRef<string>("")
     const loggedIn = useStore(useCallback(state =>state.loggedIn, []))
-    const history = usehistory()
+    const history = useHistory()
     useWillMount(() => {
         if(loggedIn){
             history.replace("/")
@@ -64,7 +64,7 @@ const Signup: React.FC = () => {
         }
     }, [])
 
-    const validation = useCallback((field: Fiedl, val: string) => {
+    const validation = useCallback((field: Field, val: string) => {
         const input = document.getElementById(field + "-input")
         if(field === "name"){
             if(regexMatch(field, val)){
@@ -104,7 +104,53 @@ const Signup: React.FC = () => {
     }, [])
 
     return(
+        <div id="register-container">
+            <div id="inner-register-container">
+                <p id="registerTitle">REGISTER</p>
+                <form>
+                    <div className="input-container">
+                        <input type="text" className="inputs" id="name-input" placeholder="Name" onChange={e => {
+                            nameRef.current = e.target.value
+                            validation("name", e.target.value)
+                        }} />
+                    <div>
+                    <label id="name-validation-message" className="validation-message invisible" htmlFor="name-input">Enter valid Name</label>
+                    </div>
+                    </div>
 
+                    <div className="input-container">
+                        <input type="text" className="inputs" id="email-input" placeholder="Email id" onChange={e => {
+                            nameRef.current = e.target.value
+                            validation("email", e.target.value)
+                        }} />
+                    <div>
+                    <label id="email-validation-message" className="validation-message invisible" htmlFor="email-input">Enter valid email</label>
+                    </div>
+                    </div>
+
+                    <div className="input-container">
+                        <input type="password" className="inputs" id="password-input" placeholder="Password" onChange={e => {
+                            nameRef.current = e.target.value
+                            validation("password", e.target.value)
+                        }} />
+                        <ul id="password-validation-message" className="validation-message invisible">
+                            <li>Your password should be 8 characters long</li>
+                            <li>At least one number, one uppercase Letter, one lowercase Letter and one special character</li>
+                             </ul>
+                    
+                    </div>
+                    <Button variant="contained" id="register-button" color="inherit" onClick={e => register(e)}>
+                        Register
+                    </Button>
+                    <p id="login-register">Login{" "}
+                    <Link to="/login" className="link">
+                        <b id="login-register-link">Login</b>
+                    </Link>
+                    </p>
+
+                </form>
+            </div>
+        </div>
     )
 }
 
