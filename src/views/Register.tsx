@@ -78,5 +78,34 @@ const Signup: React.FC = () => {
                 input?.classList.add('inputs-with-label')
             }
         }
+        else if(field === "email"){
+            if(regexMatch(field, val)){
+                document.getElementById("email-validation-message")?.classList.add('invisible')
+                input?.classList.remove('invalid')
+                input?.classList.remove('inputs-with-label')
+            }
+            else{
+                document.getElementById("email-validation-message")?.classList.remove('invisible')
+                input?.classList.add('invalid')
+                input?.classList.add('inputs-with-label')
+            }
+        }
+        else{
+            if(regexMatch(field, val)){
+                document.getElementById("password-validation-message")?.classList.add('invisible')
+                input?.classList.remove('invalid')
+                input?.classList.remove('inputs-with-label')
+            } else {
+                document.getElementById("password-validation-message")?.classList.remove('invisble')
+                input?.classList.add('invalid')
+                input?.classList.add('inputs-with-label')
+            }
+        }
     }, [])
+
+    return(
+
+    )
 }
+
+export default Signup
